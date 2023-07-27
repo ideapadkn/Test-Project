@@ -1,29 +1,22 @@
 <script setup>
-import { ref, watch, computed } from "vue";
+import { ref, onMounted, computed } from "vue";
 import axios from "axios";
 
 let products = ref([]);
 let searchTerm = ref("");
-let page = ref(1)
-let limit = ref(12)
-let totalPages = ref(0)
+const currentPage = ref(1);
+const itemsPerPage = 12;
 
 const getData = async () => {
   try {
-    const res = await axios.get("https://dummyjson.com/products", {
-      params: {
-        _page: page,
-        _limit: limit
-      }
-    });
+    const res = await axios.get("https://dummyjson.com/products");
     console.log(res);
-    totalPages = Math.ceil(products.length / limit)
     products.value = res.data;
   } catch (err) {
     console.error("Error fetching data:", err);
   }
 };
-getData();
+onMounted(getData);
 
 // watch(searchTerm, () => {
 //   products.value = products.value.products.filter((product) =>
@@ -49,15 +42,34 @@ const resetFilter = () => {
 
 // pages
 
-function changePage(pageNumber) {
-  page = pageNumber
-  // getData()
-}
+// Вычисляемые свойства для пагинации
+const totalItems = computed(() => products.value.length);
+const totalPages = computed(() => Math.ceil(totalItems.value / itemsPerPage));
+const startIndex = computed(() => (currentPage.value - 1) * itemsPerPage);
+const endIndex = computed(() =>
+  Math.min(startIndex.value + itemsPerPage, totalItems.value)
+);
+const paginatedData = computed(() =>
+  products.value.slice(startIndex.value, endIndex.value)
+);
 
+// Функции для переключения страниц
+const nextPage = () => {
+  if (currentPage.value < totalPages.value) {
+    currentPage.value++;
+    console.log("work");
+  }
+};
+
+const previousPage = () => {
+  if (currentPage.value > 1) {
+    currentPage.value--;
+  }
+};
 </script>
 
 <template>
-  <div class="container mx-auto px-5">
+  <div class="container mx- auto px-5">
     <!-- FILTER  -->
     <div>
       <div class="flex justify-between items-center h-[100px]">
@@ -110,32 +122,22 @@ function changePage(pageNumber) {
       </li>
     </ul>
     <!-- PAGES -->
-    <!-- <div class="flex justify-between items-center h-[100px]" v-if="totalPages > 1">
-      <button 
-        class="px-3 py-2 bg-slate-300 rounded-lg font-semibold" 
-        @click="previousPage" 
-        :disabled="page === 1"
+    <div class="flex justify-between items-center h-[100px]">
+      <button
+        class="px-3 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 font-semibold"
+        @click="previousPage"
+        :disabled="currentPage === 1"
       >
         Previous
       </button>
-      <button 
-        class="px-3 py-2 bg-slate-300 rounded-lg font-semibold" 
-        @click="nextPage" 
-        :disabled="page === totalPages"
+      <span>{{ currentPage }}</span>
+      <button
+        class="px-3 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 font-semibold"
+        @click="nextPage"
+        :disabled="currentPage === totalPages"
       >
         Next
       </button>
-    </div> -->
-
-    <!-- <div>
-      <div 
-        v-for="page in totalPages" 
-        :key="page"
-        @click="changePage(pageNumber)"
-      >
-
-      </div>
-    </div> -->
-
+    </div>
   </div>
 </template>
