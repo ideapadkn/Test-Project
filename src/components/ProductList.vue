@@ -1,17 +1,23 @@
 <script setup>
 import { ref, watch, computed } from "vue";
 import axios from "axios";
-import Paginate from 'vuejs-paginate'
 
 let products = ref([]);
 let searchTerm = ref("");
-const currentPage = ref(1);
-const pageSize = ref(12);
+let page = ref(1)
+let limit = ref(12)
+let totalPages = ref(0)
 
 const getData = async () => {
   try {
-    const res = await axios.get("https://dummyjson.com/products");
+    const res = await axios.get("https://dummyjson.com/products", {
+      params: {
+        _page: page,
+        _limit: limit
+      }
+    });
     console.log(res);
+    totalPages = Math.ceil(products.length / limit)
     products.value = res.data;
   } catch (err) {
     console.error("Error fetching data:", err);
@@ -19,11 +25,11 @@ const getData = async () => {
 };
 getData();
 
-watch(searchTerm, () => {
-  products.value = products.value.products.filter((product) =>
-    product.brand.toLowerCase().includes(searchTerm.value.toLowerCase())
-  );
-});
+// watch(searchTerm, () => {
+//   products.value = products.value.products.filter((product) =>
+//     product.brand.toLowerCase().includes(searchTerm.value.toLowerCase())
+//   );
+// });
 
 // reset filter
 const resetFilter = () => {
@@ -42,6 +48,11 @@ const resetFilter = () => {
 // };
 
 // pages
+
+function changePage(pageNumber) {
+  page = pageNumber
+  // getData()
+}
 
 </script>
 
@@ -80,8 +91,7 @@ const resetFilter = () => {
               <b>{{ product.title }}</b>
             </div>
             <div>
-              <span><b>Description:</b></span>
-              <span>{{ product.description }}</span>
+              <span><b>Description:</b></span> <span>{{ product.description }}</span>
             </div>
             <div>
               <span><b>Price:</b> </span> <span>{{ product.price }}</span>
@@ -116,12 +126,16 @@ const resetFilter = () => {
         Next
       </button>
     </div> -->
-    <Paginate
-      :pageCount="20"
-      :clickHandler="functionName"
-      :prevText="'Prev'"
-      :nextText="'Next'"
-      :containerClass="'className'">
-    />
+
+    <!-- <div>
+      <div 
+        v-for="page in totalPages" 
+        :key="page"
+        @click="changePage(pageNumber)"
+      >
+
+      </div>
+    </div> -->
+
   </div>
 </template>
