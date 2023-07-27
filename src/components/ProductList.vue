@@ -69,7 +69,7 @@ const previousPage = () => {
 </script>
 
 <template>
-  <div class="container mx- auto px-5">
+  <div class="container mx-auto px-5">
     <!-- FILTER  -->
     <div>
       <div class="flex justify-between items-center h-[100px]">
