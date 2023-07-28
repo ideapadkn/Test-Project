@@ -66,6 +66,9 @@ const changePage = (pageNumber) => {
             v-model="searchTerm"
             type="text"
           />
+          <div>
+            Quantity products: {{ filteredProducts.length }}
+          </div>
           <!-- <button 
             @click="search"
             class="ml-5 px-3 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 font-semibold"  
