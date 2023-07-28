@@ -1,5 +1,21 @@
 <script setup>
-import { defineProps } from 'vue'
+import { defineProps } from "vue";
+
+const page = defineProps({
+  type: Number,
+  required: true,
+  totalPages: {
+    type: Number,
+    required: true,
+  },
+});
+
+const changePage = (pageNumber) => {
+  page.value = pageNumber;
+  getData();
+
+  window.scrollTo(0, 0);
+};
 </script>
 
 <template>

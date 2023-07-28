@@ -22,7 +22,6 @@ const getData = async () => {
     console.log(totalPages);
     console.log(res.data);
     products.value = res.data;
-
     totalPages = Math.ceil(res.data?.total / 12);
   } catch (err) {
     console.error("Error fetching data:", err);
@@ -46,12 +45,6 @@ const resetFilter = () => {
 
 // pagination
 
-const changePage = (pageNumber) => {
-  page.value = pageNumber;
-  getData();
-
-  window.scrollTo(0, 0);
-};
 </script>
 
 <template>
@@ -111,8 +104,12 @@ const changePage = (pageNumber) => {
     </router-link>
 
     <!-- PAGINATION -->
-    <!-- <Pagination /> -->
-    <div class="flex justify-center gap-3 items-center h-[100px]">
+    <Pagination
+      :page="page" 
+      :totalPages="totalPages" 
+      @update:page="changePage"
+    />
+    <!-- <div class="flex justify-center gap-3 items-center h-[100px]">
       <div
         class="text-black border-2 w-[40px] h-[40px] flex justify-center items-center cursor-pointer"
         v-for="pageNumber in totalPages"
@@ -124,7 +121,7 @@ const changePage = (pageNumber) => {
       >
         {{ pageNumber }}
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
