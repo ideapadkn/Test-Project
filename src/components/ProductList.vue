@@ -11,11 +11,18 @@ let totalPages = ref(0)
 
 const getData = async () => {
   try {
-    const res = await axios.get("https://dummyjson.com/products?limit=0");
-    totalPages = Math.ceil(res.data.products.length / 12)
+    const res = await axios.get("https://dummyjson.com/products", {
+      params: {
+        limit: limit.value,
+        skip: page.value
+      }
+    });
+    
     console.log(totalPages)
     console.log(res.data);
     products.value = res.data;
+
+    totalPages = Math.ceil(res.data?.total / 12)
   } catch (err) {
     console.error("Error fetching data:", err);
   }
@@ -39,8 +46,11 @@ const resetFilter = () => {
 // pagination
 
 const changePage = (pageNumber) => {
-  page = pageNumber
+  
+  page.value = pageNumber
   getData()
+
+  window.scrollTo(0, 0)
 }
 
 </script>
@@ -99,9 +109,9 @@ const changePage = (pageNumber) => {
       </li>
     </ul>
     <!-- PAGINATION -->
-    <div class="flex justify-between items-center h-[100px]">
+    <div class="flex justify-center gap-3 items-center h-[100px]">
       <div 
-        class="text-black border-2 w-[40px] h-[40px] flex justify-center items-center"
+        class="text-black border-2 w-[40px] h-[40px] flex justify-center items-center cursor-pointer"
         v-for="pageNumber in totalPages" 
         :key="pageNumber"
         :class="{
@@ -119,7 +129,7 @@ const changePage = (pageNumber) => {
 .current-page {
   border: 2px solid #000;
 }
-@media (max-width: 500px) {
+@media (max-width: 600px) {
   .info {
     flex-wrap: wrap;
   }

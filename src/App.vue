@@ -4,7 +4,7 @@ import ProductList from "./components/ProductList.vue";
 
 <template>
   <div>
-    <h1 class="text-3xl font-semibold mb-5 text-center mt-5">Product List</h1>
+    <h1 class="text-4xl font-semibold mb-5 text-center mt-5">Product List</h1>
     <ProductList />
   </div>
 </template>
