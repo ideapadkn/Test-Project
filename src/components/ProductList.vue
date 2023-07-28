@@ -67,21 +67,20 @@ const changePage = (pageNumber) => {
           @click="resetFilter"
           class="px-3 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 font-semibold"
         >
-          Filter Reset
+          Reset
         </button>
       </div>
     </div>
     <!-- PRODUCTS  -->
     <ul>
       <li v-for="product in filteredProducts" :key="product.id">
-        <div class="flex justify-between p-5 border-2 mb-2 shadow-md">
-          <div>
+        <div class="flex justify-between p-5 border-2 mb-2 shadow-md gap-2 info">
+          <div class="info-text">
             <div class="text-[24px]">
               <b>{{ product.title }}</b>
             </div>
             <div>
-              <span><b>Description:</b></span>
-              <span>{{ product.description }}</span>
+              <span><b>Description:</b> </span> <span>{{ product.description }}</span>
             </div>
             <div>
               <span><b>Price:</b> </span> <span>{{ product.price }}</span>
@@ -93,7 +92,7 @@ const changePage = (pageNumber) => {
               <span><b>Brand:</b> </span> <span>{{ product.brand }}</span>
             </div>
           </div>
-          <div class="w-[100px]">
+          <div class="w-[150px] info-img">
             <img :src="product.images[0]" alt="" />
           </div>
         </div>
@@ -119,5 +118,14 @@ const changePage = (pageNumber) => {
 <style>
 .current-page {
   border: 2px solid #000;
+}
+@media (max-width: 500px) {
+  .info {
+    flex-wrap: wrap;
+  }
+  .info-img {
+    margin-top: 20px;
+    width: 100%;
+  }
 }
 </style>
