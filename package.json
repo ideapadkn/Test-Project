@@ -11,6 +11,7 @@
   "dependencies": {
     "axios": "^1.4.0",
     "vue": "^3.3.4",
+    "vue-awesome-paginate": "^1.1.46",
     "vuejs-paginate-next": "^1.0.2",
     "vuex": "^4.1.0"
   },

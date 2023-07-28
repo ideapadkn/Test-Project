@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted, computed, watch } from "vue";
 import axios from "axios";
 
 let products = ref([]);
@@ -18,31 +18,22 @@ const getData = async () => {
 };
 onMounted(getData);
 
-// watch(searchTerm, () => {
-//   products.value = products.value.products.filter((product) =>
-//     product.brand.toLowerCase().includes(searchTerm.value.toLowerCase())
-//   );
-// });
+
+// filter by brand
+const filteredProducts = computed(() =>{
+  return products.value?.products?.filter((product) =>
+    product.brand.toLowerCase().includes(searchTerm.value.toLowerCase())
+  ) || [];
+})
 
 // reset filter
 const resetFilter = () => {
   searchTerm.value = "";
 };
 
-// const search = () => {
-//   if (!searchTerm.value) {
-//     get();
-//   } else {
-//     const filteredProducts = products.value.products.filter((product) =>
-//       product.brand.toLowerCase().includes(searchTerm.value.toLowerCase())
-//     );
-//     products.value = filteredProducts;
-//   }
-// };
 
 // pages
 
-// Вычисляемые свойства для пагинации
 const totalItems = computed(() => products.value.length);
 const totalPages = computed(() => Math.ceil(totalItems.value / itemsPerPage));
 const startIndex = computed(() => (currentPage.value - 1) * itemsPerPage);
@@ -53,7 +44,7 @@ const paginatedData = computed(() =>
   products.value.slice(startIndex.value, endIndex.value)
 );
 
-// Функции для переключения страниц
+
 const nextPage = () => {
   if (currentPage.value < totalPages.value) {
     currentPage.value++;
@@ -76,7 +67,7 @@ const previousPage = () => {
         <div>
           <input
             class="px-3 py-2 border-2"
-            v-model.trim="searchTerm"
+            v-model="searchTerm"
             type="text"
           />
           <!-- <button 
@@ -96,14 +87,15 @@ const previousPage = () => {
     </div>
     <!-- PRODUCTS  -->
     <ul>
-      <li v-for="product in products.products" :key="product.id">
+      <li v-for="product in filteredProducts" :key="product.id">
         <div class="flex justify-between p-5 border-2 mb-2 shadow-md">
           <div>
             <div class="text-[24px]">
               <b>{{ product.title }}</b>
             </div>
             <div>
-              <span><b>Description:</b></span> <span>{{ product.description }}</span>
+              <span><b>Description:</b></span>
+              <span>{{ product.description }}</span>
             </div>
             <div>
               <span><b>Price:</b> </span> <span>{{ product.price }}</span>
@@ -122,7 +114,7 @@ const previousPage = () => {
       </li>
     </ul>
     <!-- PAGES -->
-    <div class="flex justify-between items-center h-[100px]">
+    <!-- <div class="flex justify-between items-center h-[100px]">
       <button
         class="px-3 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 font-semibold"
         @click="previousPage"
@@ -138,6 +130,6 @@ const previousPage = () => {
       >
         Next
       </button>
-    </div>
+    </div> -->
   </div>
 </template>
