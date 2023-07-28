@@ -4,77 +4,61 @@ import axios from "axios";
 
 let products = ref([]);
 let searchTerm = ref("");
-let page = ref(1)
-let limit = ref(12)
-let totalPages = ref(0)
-
+let page = ref(1);
+let limit = ref(12);
+let totalPages = ref(0);
 
 const getData = async () => {
   try {
     const res = await axios.get("https://dummyjson.com/products", {
       params: {
         limit: limit.value,
-        skip: page.value
-      }
+        skip: page.value,
+      },
     });
-    
-    console.log(totalPages)
+
+    console.log(totalPages);
     console.log(res.data);
     products.value = res.data;
 
-    totalPages = Math.ceil(res.data?.total / 12)
+    totalPages = Math.ceil(res.data?.total / 12);
   } catch (err) {
     console.error("Error fetching data:", err);
   }
 };
 getData();
 
-
 // filter by brand
-const filteredProducts = computed(() =>{
-  return products.value?.products?.filter((product) =>
-    product.brand.toLowerCase().includes(searchTerm.value.toLowerCase())
-  ) || [];
-})
+const filteredProducts = computed(() => {
+  return (
+    products.value?.products?.filter((product) =>
+      product.brand.toLowerCase().includes(searchTerm.value.toLowerCase())
+    ) || []
+  );
+});
 
 // reset filter
 const resetFilter = () => {
   searchTerm.value = "";
 };
 
-
 // pagination
 
 const changePage = (pageNumber) => {
-  
-  page.value = pageNumber
-  getData()
+  page.value = pageNumber;
+  getData();
 
-  window.scrollTo(0, 0)
-}
-
+  window.scrollTo(0, 0);
+};
 </script>
 
 <template>
   <div class="container mx-auto px-5">
     <!-- FILTER  -->
-    <div>
+    <div class="mb-5">
       <div class="flex justify-between items-center h-[100px]">
         <div>
-          <input
-            class="px-3 py-2 border-2"
-            v-model="searchTerm"
-            type="text"
-          />
-          <div>
-            Quantity products: {{ filteredProducts.length }}
-          </div>
-          <!-- <button 
-            @click="search"
-            class="ml-5 px-3 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 font-semibold"  
-          >
-            Search
-          </button> -->
+          <input class="px-3 py-2 border-2" v-model="searchTerm" type="text" />
         </div>
         <button
           @click="resetFilter"
@@ -83,17 +67,21 @@ const changePage = (pageNumber) => {
           Reset
         </button>
       </div>
+      <div>Quantity products: {{ filteredProducts.length }}</div>
     </div>
     <!-- PRODUCTS  -->
     <ul>
       <li v-for="product in filteredProducts" :key="product.id">
-        <div class="flex justify-between p-5 border-2 mb-2 shadow-md gap-2 info">
+        <div
+          class="flex justify-between p-5 border-2 mb-2 shadow-md gap-2 info"
+        >
           <div class="info-text">
             <div class="text-[24px]">
               <b>{{ product.title }}</b>
             </div>
             <div>
-              <span><b>Description:</b> </span> <span>{{ product.description }}</span>
+              <span><b>Description:</b> </span>
+              <span>{{ product.description }}</span>
             </div>
             <div>
               <span><b>Price:</b> </span> <span>{{ product.price }}</span>
@@ -113,12 +101,12 @@ const changePage = (pageNumber) => {
     </ul>
     <!-- PAGINATION -->
     <div class="flex justify-center gap-3 items-center h-[100px]">
-      <div 
+      <div
         class="text-black border-2 w-[40px] h-[40px] flex justify-center items-center cursor-pointer"
-        v-for="pageNumber in totalPages" 
+        v-for="pageNumber in totalPages"
         :key="pageNumber"
         :class="{
-          'current-page': page === pageNumber
+          'current-page': page === pageNumber,
         }"
         @click="changePage(pageNumber)"
       >
