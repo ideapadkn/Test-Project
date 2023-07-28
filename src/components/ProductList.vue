@@ -1,22 +1,26 @@
 <script setup>
-import { ref, onMounted, computed, watch } from "vue";
+import { ref, onMounted, computed } from "vue";
 import axios from "axios";
 
 let products = ref([]);
 let searchTerm = ref("");
-const currentPage = ref(1);
-const itemsPerPage = 12;
+let page = ref(1)
+let limit = ref(12)
+let totalPages = ref(0)
+
 
 const getData = async () => {
   try {
-    const res = await axios.get("https://dummyjson.com/products");
-    console.log(res);
+    const res = await axios.get("https://dummyjson.com/products?limit=0");
+    totalPages = Math.ceil(res.data.products.length / 12)
+    console.log(totalPages)
+    console.log(res.data);
     products.value = res.data;
   } catch (err) {
     console.error("Error fetching data:", err);
   }
 };
-onMounted(getData);
+getData();
 
 
 // filter by brand
@@ -32,31 +36,13 @@ const resetFilter = () => {
 };
 
 
-// pages
+// pagination
 
-const totalItems = computed(() => products.value.length);
-const totalPages = computed(() => Math.ceil(totalItems.value / itemsPerPage));
-const startIndex = computed(() => (currentPage.value - 1) * itemsPerPage);
-const endIndex = computed(() =>
-  Math.min(startIndex.value + itemsPerPage, totalItems.value)
-);
-const paginatedData = computed(() =>
-  products.value.slice(startIndex.value, endIndex.value)
-);
+const changePage = (pageNumber) => {
+  page = pageNumber
+  getData()
+}
 
-
-const nextPage = () => {
-  if (currentPage.value < totalPages.value) {
-    currentPage.value++;
-    console.log("work");
-  }
-};
-
-const previousPage = () => {
-  if (currentPage.value > 1) {
-    currentPage.value--;
-  }
-};
 </script>
 
 <template>
@@ -113,23 +99,25 @@ const previousPage = () => {
         </div>
       </li>
     </ul>
-    <!-- PAGES -->
-    <!-- <div class="flex justify-between items-center h-[100px]">
-      <button
-        class="px-3 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 font-semibold"
-        @click="previousPage"
-        :disabled="currentPage === 1"
+    <!-- PAGINATION -->
+    <div class="flex justify-between items-center h-[100px]">
+      <div 
+        class="text-black border-2 w-[40px] h-[40px] flex justify-center items-center"
+        v-for="pageNumber in totalPages" 
+        :key="pageNumber"
+        :class="{
+          'current-page': page === pageNumber
+        }"
+        @click="changePage(pageNumber)"
       >
-        Previous
-      </button>
-      <span>{{ currentPage }}</span>
-      <button
-        class="px-3 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 font-semibold"
-        @click="nextPage"
-        :disabled="currentPage === totalPages"
-      >
-        Next
-      </button>
-    </div> -->
+        {{ pageNumber }}
+      </div>
+    </div>
   </div>
 </template>
+
+<style>
+.current-page {
+  border: 2px solid #000;
+}
+</style>
