@@ -2,7 +2,7 @@
 import { ref, computed } from "vue";
 import axios from "axios";
 // import ProductItem from "./ProductItem.vue";
-import Pagination from "./Pagination.vue";
+// import Pagination from "./Pagination.vue";
 
 let products = ref([]);
 let searchTerm = ref("");
@@ -72,7 +72,7 @@ const changePage = (pageNumber) => {
 
     <!-- PRODUCTS  -->
     <!-- <ProductItem :filteredProducts="filteredProducts" /> -->
-    <router-link to="product/products.id">
+    <router-link :to="`product/${products.id}`">
       <ul class="flex gap-5 flex-wrap">
         <li
           class="w-[350px] h-full hover:scale-105 transition-all"

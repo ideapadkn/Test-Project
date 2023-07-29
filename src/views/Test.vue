@@ -1,3 +1,3 @@
 <template>
-  <router-link to="/"> home </router-link>
+  <router-link to="/"> test </router-link>
 </template>
