@@ -1,7 +1,7 @@
-import { createApp } from 'vue'
-import './style.css'
-import App from './App.vue'
-import router from './router'
+import { createApp } from "vue";
+import "./style.css";
+import App from "./App.vue";
+import router from "./router";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -14,12 +14,10 @@ const firebaseConfig = {
   projectId: "vite-project-669c5",
   storageBucket: "vite-project-669c5.appspot.com",
   messagingSenderId: "476355464609",
-  appId: "1:476355464609:web:289e90d746503e88574fe0"
+  appId: "1:476355464609:web:289e90d746503e88574fe0",
 };
 
 // Initialize Firebase
 initializeApp(firebaseConfig);
 
-createApp(App)
-  .use(router)
-  .mount('#app')
+createApp(App).use(router).mount("#app");

@@ -44,7 +44,12 @@ const resetFilter = () => {
 };
 
 // pagination
+const changePage = (pageNumber) => {
+  page.value = pageNumber;
+  getData();
 
+  window.scrollTo(0, 0);
+};
 </script>
 
 <template>
@@ -84,7 +89,7 @@ const resetFilter = () => {
               <div class="text-[24px] overflow-hidden">
                 <b>{{ product.title }}</b>
               </div>
-               <div>
+              <div>
                 <span><b>Description:</b> </span>
                 <span>{{ product.description }}</span>
               </div>
@@ -105,8 +110,8 @@ const resetFilter = () => {
 
     <!-- PAGINATION -->
     <Pagination
-      :page="page" 
-      :totalPages="totalPages" 
+      :page="page"
+      :totalPages="totalPages"
       @update:page="changePage"
     />
     <!-- <div class="flex justify-center gap-3 items-center h-[100px]">

@@ -1,3 +1,1 @@
-<template>
-  Feed
-</template>
+<template>Feed</template>
