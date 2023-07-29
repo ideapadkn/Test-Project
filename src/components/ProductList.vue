@@ -58,11 +58,11 @@ const changePage = (pageNumber) => {
     <div class="mb-5">
       <div class="flex justify-between items-center h-[100px]">
         <div>
-          <input class="px-3 py-2 border-2" v-model="searchTerm" type="text" />
+          <input placeholder="Search by brand" class="px-3 py-2 border-2" v-model="searchTerm" type="text" />
         </div>
         <button
           @click="resetFilter"
-          class="px-3 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 font-semibold"
+          class="px-3 py-2 bg-red-300 rounded-lg hover:bg-red-500 hover:text-white font-semibold transition-all"
         >
           Reset
         </button>
