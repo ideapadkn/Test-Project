@@ -19,7 +19,7 @@ const register = () => {
 
       console.log(auth.currentUser);
 
-      router.push("/feed");
+      router.push("/");
     })
     .catch((err) => {
       console.log(err.code);
@@ -32,7 +32,7 @@ const signInWithGoogle = () => {
   signInWithPopup(getAuth(), provider)
     .then((result) => {
       console.log(result.user);
-      router.push("/feed");
+      router.push("/");
     })
     .catch((err) => {
       console.log(err);

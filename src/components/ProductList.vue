@@ -86,13 +86,13 @@ const changePage = (pageNumber) => {
               <img class="h-[200px] w-full" :src="product.images[0]" alt="" />
             </div>
             <div class="info-text">
-              <div class="text-[24px] overflow-hidden">
+              <div class="text-[18px] w-[300px] overflow-hidden">
                 <b>{{ product.title }}</b>
               </div>
-              <div>
+              <!-- <div>
                 <span><b>Description:</b> </span>
                 <span>{{ product.description }}</span>
-              </div>
+              </div> -->
               <div>
                 <span><b>Price:</b> </span> <span>{{ product.price }}</span>
               </div>
@@ -109,12 +109,12 @@ const changePage = (pageNumber) => {
     </router-link>
 
     <!-- PAGINATION -->
-    <Pagination
+    <!-- <Pagination
       :page="page"
       :totalPages="totalPages"
       @update:page="changePage"
-    />
-    <!-- <div class="flex justify-center gap-3 items-center h-[100px]">
+    /> -->
+    <div class="flex justify-center gap-3 items-center h-[100px]">
       <div
         class="text-black border-2 w-[40px] h-[40px] flex justify-center items-center cursor-pointer"
         v-for="pageNumber in totalPages"
@@ -126,7 +126,7 @@ const changePage = (pageNumber) => {
       >
         {{ pageNumber }}
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 
