@@ -4,7 +4,7 @@ import Home from "../views/Home.vue";
 import Register from "../views/Register.vue";
 import SignIn from "../views/SignIn.vue";
 import Feed from "../views/Feed.vue";
-import Test from "../views/Test.vue";
+import Product from "../views/Product.vue";
 
 const routes = [
   {
@@ -13,7 +13,7 @@ const routes = [
   },
   {
     path: "/product/:rid",
-    component: Test,
+    component: Product,
   },
   {
     path: "/register",

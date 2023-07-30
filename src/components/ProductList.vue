@@ -2,7 +2,7 @@
 import { ref, computed } from "vue";
 import axios from "axios";
 // import ProductItem from "./ProductItem.vue";
-// import Pagination from "./Pagination.vue";
+import Pagination from "./Pagination.vue";
 
 let products = ref([]);
 let searchTerm = ref("");
@@ -29,7 +29,7 @@ const getData = async () => {
 };
 getData();
 
-// filter by brand
+// FILTER BY BRAND
 const filteredProducts = computed(() => {
   return (
     products.value?.products?.filter((product) =>
@@ -38,12 +38,12 @@ const filteredProducts = computed(() => {
   );
 });
 
-// reset filter
+// RESET FILTER
 const resetFilter = () => {
   searchTerm.value = "";
 };
 
-// pagination
+// PAGINATION
 const changePage = (pageNumber) => {
   page.value = pageNumber;
   getData();
@@ -58,7 +58,7 @@ const changePage = (pageNumber) => {
     <div class="mb-5">
       <div class="flex justify-between items-center h-[100px]">
         <div>
-          <input placeholder="Search by brand" class="px-3 py-2 border-2" v-model="searchTerm" type="text" />
+          <input placeholder="Search by brand..." class="px-3 py-2 border-2 outline-none" v-model="searchTerm" type="text" />
         </div>
         <button
           @click="resetFilter"

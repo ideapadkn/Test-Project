@@ -2,7 +2,7 @@
 import { defineProps } from "vue";
 
 const page = defineProps({
-  type: Number,
+  type: Array,
   required: true,
   totalPages: {
     type: Number,
