@@ -7,7 +7,7 @@ let products = ref([]);
 
 const getData = async () => {
   try {
-    const res = await axios.get("https://dummyjson.com/products/18")
+    const res = await axios.get("https://dummyjson.com/products/18");
     console.log(res.data);
     products.value = res.data;
   } catch (err) {
@@ -20,15 +20,13 @@ getData();
 <template>
   <div class="container mx-auto px-5">
     <div class="mb-5 py-5">
-      <router-link to="/">
-        back
-      </router-link>
+      <router-link to="/"> back </router-link>
     </div>
     <!-- PRODUCT -->
     <div class="mb-8">
       <div class="flex justify-center flex-col">
         <div class="mb-5">
-          <img :src="products.images[0]" alt="">
+          <img :src="products.images[0]" alt="" />
         </div>
         <div class="text-3xl font-semibold mb-5">
           {{ products.title }}
@@ -37,15 +35,9 @@ getData();
           {{ products.description }}
         </div>
         <div class="flex justify-between items-center">
-          <div>
-            <b>Price:</b> {{ products.price }}
-          </div>
-          <div>
-            <b>Stock:</b> {{ products.stock }}
-          </div>
-          <div>
-            <b>Rating:</b> {{ products.rating }}
-          </div>
+          <div><b>Price:</b> {{ products.price }}</div>
+          <div><b>Stock:</b> {{ products.stock }}</div>
+          <div><b>Rating:</b> {{ products.rating }}</div>
         </div>
       </div>
     </div>
@@ -53,4 +45,3 @@ getData();
     <Reviews />
   </div>
 </template>
-
