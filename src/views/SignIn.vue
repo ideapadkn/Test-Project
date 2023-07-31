@@ -11,7 +11,7 @@ const router = useRouter();
 const register = () => {
   signInWithEmailAndPassword(getAuth(), email.value, password.value)
     .then((data) => {
-      console.log("Successfully signed in!");
+      alert("Successfully signed in!");
 
       console.log(auth.currentUser);
 
@@ -19,20 +19,20 @@ const register = () => {
     })
     .catch((err) => {
       console.log(err.code);
-      switch (err.code) {
-        case "auth/invalid-email":
-          errMsg.value = "Invalid email";
-          break;
-        case "auth/user-not-found":
-          errMsg.value = "No account with that email was found!";
-          break;
-        case "auth/wrong-password":
-          errMsg.value = "Incorrect password";
-          break;
-        default:
-          errMsg.value = "Email or password was incorrect";
-          break;
-      }
+      // switch (err.code) {
+      //   case "auth/invalid-email":
+      //     errMsg.value = "Invalid email";
+      //     break;
+      //   case "auth/user-not-found":
+      //     errMsg.value = "No account with that email was found!";
+      //     break;
+      //   case "auth/wrong-password":
+      //     errMsg.value = "Incorrect password";
+      //     break;
+      //   default:
+      //     errMsg.value = "Email or password was incorrect";
+      //     break;
+      // }
     });
 };
 
@@ -47,7 +47,7 @@ const signInWithGoogle = () => {};
         type="email"
         placeholder="Email"
         v-model="email"
-        class="px-3 py-2 rounded shadow-md block mb-5"
+        class="px-3 py-2 rounded shadow-md block mb-5 outline-none"
       />
     </p>
     <p>
@@ -55,7 +55,7 @@ const signInWithGoogle = () => {};
         type="password"
         placeholder="Password"
         v-model="password"
-        class="px-3 py-2 rounded shadow-md block mb-5"
+        class="px-3 py-2 rounded shadow-md block mb-5 outline-none"
       />
     </p>
     <p v-if="errMsg">

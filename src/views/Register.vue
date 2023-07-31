@@ -15,7 +15,7 @@ const router = useRouter();
 const register = () => {
   createUserWithEmailAndPassword(getAuth(), email.value, password.value)
     .then((data) => {
-      console.log("Successfully registered!");
+      alert("Successfully registered!");
 
       console.log(auth.currentUser);
 
@@ -48,7 +48,7 @@ const signInWithGoogle = () => {
         type="email"
         placeholder="Email"
         v-model="email"
-        class="px-3 py-2 rounded shadow-md block mb-5"
+        class="px-3 py-2 rounded shadow-md block mb-5 outline-none"
       />
     </p>
     <p>
@@ -56,7 +56,7 @@ const signInWithGoogle = () => {
         type="password"
         placeholder="Password"
         v-model="password"
-        class="px-3 py-2 rounded shadow-md block mb-5"
+        class="px-3 py-2 rounded shadow-md block mb-5 outline-none"
       />
     </p>
     <p>

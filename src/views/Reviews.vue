@@ -1,8 +1,22 @@
 <script setup>
 import { ref, onMounted } from "vue";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 
+const isLoggedIn = ref(false);
 const reviews = ref([]);
 const comment = ref("");
+
+let auth;
+onMounted(() => {
+  auth = getAuth();
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      isLoggedIn.value = true;
+    } else {
+      isLoggedIn.value = false;
+    }
+  });
+});
 
 const addComment = () => {
   if (comment.value.trim() !== "") {
@@ -21,7 +35,7 @@ onMounted(() => {
     reviews.value = JSON.parse(savedTasks);
   }
 });
-// save local storage
+// SAVE LOCAL STORE
 const saveTasksToLocalStorage = () => {
   localStorage.setItem("reviews", JSON.stringify(reviews.value));
 };
@@ -40,6 +54,7 @@ const saveTasksToLocalStorage = () => {
       <button
         @click="addComment"
         class="px-3 py-2 bg-green-300 hover:bg-green-500 transition-all rounded text-white"
+        :disabled="isLoggedIn === false"
       >
         Add
       </button>
