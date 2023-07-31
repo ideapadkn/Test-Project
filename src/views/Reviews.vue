@@ -1,12 +1,29 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 
 const reviews = ref([]);
 const comment = ref("");
 
 const addComment = () => {
-  // reviews.push(comment.value)
-  comment.value = "";
+  if (comment.value.trim() !== "") {
+    reviews.value.push({
+      id: Date.now(),
+      text: comment.value,
+    });
+    comment.value = "";
+    saveTasksToLocalStorage();
+  }
+};
+
+onMounted(() => {
+  const savedTasks = localStorage.getItem("reviews");
+  if (savedTasks) {
+    reviews.value = JSON.parse(savedTasks);
+  }
+});
+// save local storage
+const saveTasksToLocalStorage = () => {
+  localStorage.setItem("reviews", JSON.stringify(reviews.value));
 };
 </script>
 
@@ -18,7 +35,7 @@ const addComment = () => {
         v-model="comment"
         type="text"
         placeholder="Your comment..."
-        class="border-b-2 w-[300px] px-3 py-2 outline-none"
+        class="border-b-2 w-[200px] px-3 py-2 outline-none"
       />
       <button
         @click="addComment"
@@ -27,8 +44,8 @@ const addComment = () => {
         Add
       </button>
     </div>
-    <div>
-      {{ reviews }}
+    <div class="text-black mb-5 border-2 px-3 py-2 rounded-md" v-for="review in reviews" :key="review.id">
+      {{ review.text }}
     </div>
   </div>
 </template>

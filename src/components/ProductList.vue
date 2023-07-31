@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, watchEffect } from "vue";
 import axios from "axios";
 // import ProductItem from "./ProductItem.vue";
 import Pagination from "./Pagination.vue";
@@ -50,6 +50,16 @@ const changePage = (pageNumber) => {
 
   window.scrollTo(0, 0);
 };
+
+// SAVE DATA
+
+page.value = parseInt(sessionStorage.getItem("page") || "1");
+filteredProducts.value = parseInt(
+  sessionStorage.getItem("filteredProducts") || []
+);
+watchEffect(() => {
+  sessionStorage.setItem("page", page.value.toString());
+});
 </script>
 
 <template>
@@ -58,7 +68,12 @@ const changePage = (pageNumber) => {
     <div class="mb-5">
       <div class="flex justify-between items-center h-[100px]">
         <div>
-          <input placeholder="Search by brand..." class="px-3 py-2 border-2 outline-none" v-model="searchTerm" type="text" />
+          <input
+            placeholder="Search by brand..."
+            class="px-3 py-2 border-2 outline-none"
+            v-model="searchTerm"
+            type="text"
+          />
         </div>
         <button
           @click="resetFilter"

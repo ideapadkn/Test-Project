@@ -24,20 +24,22 @@ getData();
     </div>
     <!-- PRODUCT -->
     <div class="mb-8">
-      <div class="flex justify-center flex-col">
+      <div class="flex justify-center gap-8">
         <div class="mb-5">
-          <img :src="products.images[0]" alt="" />
+          <img :src="products.images[0]" alt="product image" />
         </div>
-        <div class="text-3xl font-semibold mb-5">
-          {{ products.title }}
-        </div>
-        <div class="mb-5">
-          {{ products.description }}
-        </div>
-        <div class="flex justify-between items-center">
-          <div><b>Price:</b> {{ products.price }}</div>
-          <div><b>Stock:</b> {{ products.stock }}</div>
-          <div><b>Rating:</b> {{ products.rating }}</div>
+        <div class="">
+          <div class="text-3xl font-semibold mb-5">
+            {{ products.title }}
+          </div>
+          <div class="mb-5">
+            {{ products.description }}
+          </div>
+          <div class="flex justify-between items-center">
+            <div><b>Price:</b> {{ products.price }}</div>
+            <div><b>Stock:</b> {{ products.stock }}</div>
+            <div><b>Rating:</b> {{ products.rating }}</div>
+          </div>
         </div>
       </div>
     </div>
