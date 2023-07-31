@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const isLoggedIn = ref(false);
 const reviews = ref([]);
@@ -64,6 +64,7 @@ const saveTasksToLocalStorage = () => {
       v-for="review in reviews"
       :key="review.id"
     >
+      {{ user }}
       {{ review.text }}
     </div>
   </div>

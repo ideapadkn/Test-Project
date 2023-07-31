@@ -50,7 +50,6 @@ const changePage = (pageNumber) => {
 };
 
 // SAVE DATA
-
 page.value = parseInt(sessionStorage.getItem("page") || "1");
 const storedData = JSON.parse(sessionStorage.getItem("products") || "[]");
 products.value = storedData.data || [];
