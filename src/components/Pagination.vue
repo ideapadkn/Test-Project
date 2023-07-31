@@ -8,14 +8,14 @@ const props = defineProps({
   },
   page: {
     type: Number,
-    ruquired: true
-  }
+    ruquired: true,
+  },
 });
 
 const emit = defineEmits("change");
 
 const changePage = (page) => {
-  emit('change', page)
+  emit("change", page);
 };
 </script>
 
