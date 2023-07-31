@@ -14,8 +14,8 @@ const props = defineProps({
 
 const emit = defineEmits("change");
 
-const changePage = () => {
-  emit('change', pageNumber)
+const changePage = (page) => {
+  emit('change', page)
 };
 </script>
 
