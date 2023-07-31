@@ -9,9 +9,7 @@ let products = ref([]);
 
 const getData = async () => {
   try {
-    const res = await axios.get(
-      `https://dummyjson.com/products/${route.params.id}`
-    );
+    const res = await axios.get(`https://dummyjson.com/products/${products.id}`);
     console.log(res.data);
     products.value = res.data;
   } catch (err) {

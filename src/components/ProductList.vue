@@ -52,12 +52,11 @@ const changePage = (pageNumber) => {
 // SAVE DATA
 
 page.value = parseInt(sessionStorage.getItem("page") || "1");
-filteredProducts.value = parseInt(
-  sessionStorage.getItem("filteredProducts") || []
-);
+const storedData = JSON.parse(sessionStorage.getItem('products') || '[]');
+products.value = storedData.data || [];
 watchEffect(() => {
   sessionStorage.setItem("page", page.value.toString());
-  sessionStorage.setItem("filteredProducts", filteredProducts.value);
+  sessionStorage.setItem('products', JSON.stringify(  { data: products.value }));
 });
 </script>
 
@@ -86,7 +85,7 @@ watchEffect(() => {
 
     <!-- PRODUCTS  -->
     <!-- <ProductItem :filteredProducts="filteredProducts" /> -->
-    <router-link :to="`product-details/${filteredProducts.id}`">
+    <router-link :to="`product/${filteredProducts.id}`">
       <ul class="flex gap-5 flex-wrap">
         <li
           class="w-[350px] h-full hover:scale-105 transition-all"
@@ -103,10 +102,6 @@ watchEffect(() => {
               <div class="text-[18px] w-[300px] overflow-hidden">
                 <b>{{ product.title }}</b>
               </div>
-              <!-- <div>
-                <span><b>Description:</b> </span>
-                <span>{{ product.description }}</span>
-              </div> -->
               <div>
                 <span><b>Price:</b> </span> <span>{{ product.price }}</span>
               </div>
