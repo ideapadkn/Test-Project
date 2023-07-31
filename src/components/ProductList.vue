@@ -2,7 +2,7 @@
 import { ref, computed, watchEffect } from "vue";
 import axios from "axios";
 // import ProductItem from "./ProductItem.vue";
-import Pagination from "./Pagination.vue";
+// import Pagination from "./Pagination.vue";
 
 let products = ref([]);
 let searchTerm = ref("");
@@ -18,8 +18,6 @@ const getData = async () => {
         skip: page.value,
       },
     });
-
-    console.log(totalPages);
     console.log(res.data);
     products.value = res.data;
     totalPages = Math.ceil(res.data?.total / 12);
@@ -59,6 +57,7 @@ filteredProducts.value = parseInt(
 );
 watchEffect(() => {
   sessionStorage.setItem("page", page.value.toString());
+  sessionStorage.setItem("filteredProducts", filteredProducts.value);
 });
 </script>
 

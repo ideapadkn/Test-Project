@@ -59,7 +59,11 @@ const saveTasksToLocalStorage = () => {
         Add
       </button>
     </div>
-    <div class="text-black mb-5 border-2 px-3 py-2 rounded-md" v-for="review in reviews" :key="review.id">
+    <div
+      class="text-black mb-5 border-2 px-3 py-2 rounded-md"
+      v-for="review in reviews"
+      :key="review.id"
+    >
       {{ review.text }}
     </div>
   </div>
