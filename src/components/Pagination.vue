@@ -1,20 +1,21 @@
 <script setup>
-import { defineProps } from "vue";
+import { defineEmits, defineProps } from "vue";
 
-const page = defineProps({
-  type: Array,
-  required: true,
+const props = defineProps({
   totalPages: {
     type: Number,
-    required: true,
+    ruquired: true,
   },
+  page: {
+    type: Number,
+    ruquired: true
+  }
 });
 
-const changePage = (pageNumber) => {
-  page.value = pageNumber;
-  getData();
+const emit = defineEmits("change");
 
-  window.scrollTo(0, 0);
+const changePage = () => {
+  emit('change', pageNumber)
 };
 </script>
 

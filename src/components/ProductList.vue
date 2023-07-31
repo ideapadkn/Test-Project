@@ -1,8 +1,8 @@
 <script setup>
 import { ref, computed, watchEffect } from "vue";
 import axios from "axios";
-// import ProductItem from "./ProductItem.vue";
-// import Pagination from "./Pagination.vue";
+import ProductItem from "./ProductItem.vue";
+import Pagination from "./Pagination.vue";
 
 let products = ref([]);
 let searchTerm = ref("");
@@ -83,9 +83,9 @@ watchEffect(() => {
     </div>
 
     <!-- PRODUCTS  -->
-    <!-- <ProductItem :filteredProducts="filteredProducts" /> -->
+    <ProductItem :filteredProducts="filteredProducts" />
 
-    <ul class="flex gap-5 flex-wrap">
+    <!-- <ul class="flex gap-5 flex-wrap">
       <li
         class="w-[350px] h-full hover:scale-105 transition-all"
         v-for="product in filteredProducts"
@@ -115,15 +115,15 @@ watchEffect(() => {
           </div>
         </router-link>
       </li>
-    </ul>
+    </ul> -->
 
     <!-- PAGINATION -->
-    <!-- <Pagination
+    <Pagination
       :page="page"
       :totalPages="totalPages"
-      @update:page="changePage"
-    /> -->
-    <div class="flex justify-center gap-3 items-center h-[100px]">
+      @change="changePage"
+    />
+    <!-- <div class="flex justify-center gap-3 items-center h-[100px]">
       <div
         class="text-black border-2 w-[40px] h-[40px] flex justify-center items-center cursor-pointer"
         v-for="pageNumber in totalPages"
@@ -135,7 +135,7 @@ watchEffect(() => {
       >
         {{ pageNumber }}
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
