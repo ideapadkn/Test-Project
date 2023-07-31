@@ -3,8 +3,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Home from "../views/Home.vue";
 import Register from "../views/Register.vue";
 import SignIn from "../views/SignIn.vue";
-import Feed from "../views/Feed.vue";
-import Product from "../views/Product.vue";
+import ProductDetails from "../views/ProductDetails.vue";
 
 const routes = [
   {
@@ -12,8 +11,8 @@ const routes = [
     component: Home,
   },
   {
-    path: "/product/:rid",
-    component: Product,
+    path: "/product-details/:rid",
+    component: ProductDetails,
   },
   {
     path: "/register",
@@ -22,13 +21,6 @@ const routes = [
   {
     path: "/sign-in",
     component: SignIn,
-  },
-  {
-    path: "/feed",
-    component: Feed,
-    meta: {
-      requiresAuth: true,
-    },
   },
 ];
 

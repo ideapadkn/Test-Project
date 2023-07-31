@@ -87,7 +87,7 @@ watchEffect(() => {
 
     <!-- PRODUCTS  -->
     <!-- <ProductItem :filteredProducts="filteredProducts" /> -->
-    <router-link :to="`product/${products.id}`">
+    <router-link :to="`product-details/${filteredProducts.id}`">
       <ul class="flex gap-5 flex-wrap">
         <li
           class="w-[350px] h-full hover:scale-105 transition-all"

@@ -2,12 +2,16 @@
 import { ref } from "vue";
 import axios from "axios";
 import Reviews from "./Reviews.vue";
+import { useRoute } from "vue-router";
 
+let route = useRoute();
 let products = ref([]);
 
 const getData = async () => {
   try {
-    const res = await axios.get("https://dummyjson.com/products/18");
+    const res = await axios.get(
+      `https://dummyjson.com/products/${route.params.id}`
+    );
     console.log(res.data);
     products.value = res.data;
   } catch (err) {
