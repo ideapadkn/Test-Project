@@ -8,11 +8,12 @@ const password = ref("");
 const errMsg = ref();
 const router = useRouter();
 
+let auth;
 const register = () => {
   signInWithEmailAndPassword(getAuth(), email.value, password.value)
     .then((data) => {
       alert("Successfully signed in!");
-      console.log(auth.currentUser);
+      console.log(auth.currentUser.email);
       router.push("/");
     })
     .catch((err) => {
