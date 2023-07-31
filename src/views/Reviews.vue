@@ -5,6 +5,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 const isLoggedIn = ref(false);
 const reviews = ref([]);
 const comment = ref("");
+const user = ref(null);
 
 let auth;
 onMounted(() => {
@@ -29,13 +30,13 @@ const addComment = () => {
   }
 };
 
+// SAVE LOCAL STORE
 onMounted(() => {
   const savedTasks = localStorage.getItem("reviews");
   if (savedTasks) {
     reviews.value = JSON.parse(savedTasks);
   }
 });
-// SAVE LOCAL STORE
 const saveTasksToLocalStorage = () => {
   localStorage.setItem("reviews", JSON.stringify(reviews.value));
 };
@@ -64,8 +65,10 @@ const saveTasksToLocalStorage = () => {
       v-for="review in reviews"
       :key="review.id"
     >
-      {{ user }}
-      {{ review.text }}
+      <div class="mb-2">
+        {{ auth.currentUser.email }}
+      </div>
+      <b>{{ review.text }}</b>
     </div>
   </div>
 </template>
