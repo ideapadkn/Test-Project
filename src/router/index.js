@@ -7,7 +7,7 @@ import ProductDetails from "../views/ProductDetails.vue";
 
 const routes = [
   {
-    path: "/",
+    path: "/:page?",
     component: Home,
   },
   {

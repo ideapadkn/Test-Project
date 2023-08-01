@@ -3,12 +3,15 @@ import { ref, computed, onMounted, watchEffect } from "vue";
 import axios from "axios";
 import ProductItem from "./ProductItem.vue";
 import Pagination from "./Pagination.vue";
+import { useRouter, useRoute } from 'vue-router'
 
 const products = ref([]);
 const searchTerm = ref("");
 const page = ref(1);
 const limit = ref(12);
 const totalPages = ref(0);
+const router = useRouter()
+const route = useRoute()
 
 // GET DATA FROM API
 const getData = async () => {
@@ -47,6 +50,7 @@ const resetFilter = () => {
 // PAGINATION
 const changePage = (pageNumber) => {
   page.value = pageNumber;
+  router.push({ query: { pageNumber } });
   getData();
 
   window.scrollTo(0, 0);

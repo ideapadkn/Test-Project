@@ -25,7 +25,7 @@ getData();
   <div class="container mx-auto px-5">
     <div class="mb-5 py-5">
       <button
-        class="px-3 py-1 rounded-md bg-red-400 hover:bg-red-600 hover:text-white transition-all"
+        class="px-3 py-1 rounded-md bg-red-400 hover:bg-red-600 text-white transition-all"
         @click="$router.back()"
       >
         Go Back
