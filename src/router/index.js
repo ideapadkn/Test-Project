@@ -1,10 +1,14 @@
-import { createRouter, createWebHistory, createWebHashHistory } from "vue-router";
+import {
+  createRouter,
+  createWebHistory,
+  createWebHashHistory,
+} from "vue-router";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Home from "../views/Home.vue";
 import Register from "../views/Register.vue";
 import SignIn from "../views/SignIn.vue";
 import ProductDetails from "../views/ProductDetails.vue";
-import ProductList from '../components/ProductList.vue'
+import ProductList from "../components/ProductList.vue";
 
 const routes = [
   {
