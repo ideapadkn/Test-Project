@@ -26,7 +26,7 @@ const handlerSignOut = () => {
 </script>
 
 <template>
-  <div>
+  <div class="container mx-auto">
     <nav class="flex justify-between items-center h-[80px]">
       <router-link to="/">
         <div class="flex justify-center items-center">
