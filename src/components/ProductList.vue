@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watchEffect } from "vue";
+import { ref, computed, onMounted, watchEffect } from "vue";
 import axios from "axios";
 import ProductItem from "./ProductItem.vue";
 import Pagination from "./Pagination.vue";
@@ -27,7 +27,11 @@ const getData = async () => {
     console.error("Error fetching data:", err);
   }
 };
-getData();
+// getData()
+
+onMounted(() => {
+  getData();
+});
 
 // FILTER BY BRAND
 const filteredProducts = computed(() => {
