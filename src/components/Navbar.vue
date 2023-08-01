@@ -28,14 +28,16 @@ const handlerSignOut = () => {
 <template>
   <div>
     <nav class="flex justify-between items-center h-[80px]">
-      <div class="flex justify-center items-center">
-        <img
-          class="inline-block w-[50px]"
-          src="https://apelsinsalon.ru/wp-content/uploads/2021/12/cropped-fav.png"
-          alt=""
-        />
-        <h1 class="inline-block text-4xl font-semibold">Apelsin</h1>
-      </div>
+      <router-link to="/">
+        <div class="flex justify-center items-center">
+          <img
+            class="inline-block w-[50px]"
+            src="https://apelsinsalon.ru/wp-content/uploads/2021/12/cropped-fav.png"
+            alt=""
+          />
+          <h1 class="inline-block text-4xl font-semibold">Apelsin</h1>
+        </div>
+      </router-link>
       <div class="flex gap-3">
         <!-- <router-link class="hover:bg-blue-400 hover:text-white hover:rounded-md px-2 py-1 transition-all" to="/feed">Feed</router-link> -->
         <router-link
