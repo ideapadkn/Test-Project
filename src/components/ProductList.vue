@@ -49,7 +49,6 @@ const resetFilter = () => {
 // PAGINATION
 const changePage = (pageNumber) => {
   page.value = pageNumber;
-  // router.push(`/currentPage${pageNumber}`)
   getData();
 
   window.scrollTo(0, 0);
