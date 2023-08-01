@@ -21,7 +21,7 @@ const register = () => {
     })
     .catch((err) => {
       console.log(err.code);
-      // alert(err.message);
+      alert(err.message);
     });
 };
 

@@ -39,19 +39,19 @@ const handlerSignOut = () => {
       <div class="flex gap-3">
         <!-- <router-link class="hover:bg-blue-400 hover:text-white hover:rounded-md px-2 py-1 transition-all" to="/feed">Feed</router-link> -->
         <router-link
-          class="hover:bg-green-400 hover:text-white hover:rounded-md px-2 py-1 transition-all"
+          class="hover:bg-green-500 hover:text-white hover:rounded-md px-2 py-1 transition-all"
           to="/register"
           v-if="isLoggedIn === false"
           >Register</router-link
         >
         <router-link
-          class="hover:bg-blue-400 hover:text-white hover:rounded-md px-2 py-1 transition-all"
+          class="hover:bg-blue-500 hover:text-white hover:rounded-md px-2 py-1 transition-all"
           to="/sign-in"
           v-if="isLoggedIn === false"
           >Login</router-link
         >
         <button
-          class="hover:bg-red-400 hover:text-white hover:rounded-md px-2 py-1 transition-all"
+          class="hover:bg-red-600 hover:text-white hover:rounded-md px-2 py-1 transition-all"
           @click="handlerSignOut"
           v-if="isLoggedIn"
         >

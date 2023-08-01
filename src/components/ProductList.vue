@@ -12,6 +12,7 @@ const limit = ref(12);
 const totalPages = ref(0);
 const router = useRouter();
 
+// GET DATA FROM API
 const getData = async () => {
   try {
     const res = await axios.get("https://dummyjson.com/products", {
@@ -27,8 +28,6 @@ const getData = async () => {
     console.error("Error fetching data:", err);
   }
 };
-// getData()
-
 onMounted(() => {
   getData();
 });
