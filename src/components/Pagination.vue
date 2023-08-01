@@ -1,5 +1,7 @@
 <script setup>
 import { defineEmits, defineProps } from "vue";
+import { useRouter } from "vue-router";
+import router from "../router";
 
 const props = defineProps({
   totalPages: {
@@ -21,7 +23,10 @@ const changePage = (page) => {
 
 <template>
   <div class="flex justify-center gap-3 items-center h-[100px]">
-    <router-link class="flex justify-center gap-3 items-center h-[100px]" :to="`/`">
+    <router-link
+      class="flex justify-center gap-3 items-center h-[100px]"
+      :to="`/`"
+    >
       <div
         class="text-black border-2 w-[40px] h-[40px] flex justify-center items-center cursor-pointer"
         v-for="pageNumber in totalPages"
