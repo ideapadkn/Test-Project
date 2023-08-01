@@ -20,7 +20,7 @@ onMounted(() => {
 });
 
 const addComment = () => {
-  if (comment.value.trim() !== "") {
+  if (comment.value.trim() !== "" && isLoggedIn) {
     reviews.value.push({
       id: Date.now(),
       text: comment.value,
@@ -54,7 +54,7 @@ const saveTasksToLocalStorage = () => {
       />
       <button
         @click="addComment"
-        class="px-3 py-2 bg-green-300 hover:bg-green-500 transition-all rounded text-white"
+        class="px-3 py-2 bg-green-300 hover:bg-green-500 transition-all rounded text-white cursor-pointer"
         :disabled="isLoggedIn === false"
       >
         Add
