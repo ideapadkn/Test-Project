@@ -1,6 +1,5 @@
 <script setup>
 import { defineEmits, defineProps } from "vue";
-import { useRouter } from "vue-router";
 
 const props = defineProps({
   totalPages: {
@@ -8,10 +7,6 @@ const props = defineProps({
     ruquired: true,
   },
   page: {
-    type: Number,
-    ruquired: true,
-  },
-  pageNumber: {
     type: Number,
     ruquired: true,
   },
