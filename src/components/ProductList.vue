@@ -3,6 +3,7 @@ import { ref, computed, onMounted, watchEffect } from "vue";
 import axios from "axios";
 import ProductItem from "./ProductItem.vue";
 import Pagination from "./Pagination.vue";
+import Navbar from "./Navbar.vue";
 import { useRouter } from "vue-router";
 
 const products = ref([]);
@@ -23,7 +24,7 @@ const getData = async () => {
     });
     console.log(res.data);
     products.value = res.data;
-    totalPages.value = Math.ceil(res.data?.total / 12);
+    totalPages.value = Math.ceil(res.data?.total / limit.value);
   } catch (err) {
     console.error("Error fetching data:", err);
   }
@@ -49,7 +50,6 @@ const resetFilter = () => {
 // PAGINATION
 const changePage = (pageNumber) => {
   page.value = pageNumber;
-  router.push({ query: { pageNumber } });
   getData();
 
   window.scrollTo(0, 0);
@@ -71,7 +71,9 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div>
+  <div class="container mx-auto px-5">
+    <!-- NAVBAR -->
+    <Navbar />
     <!-- FILTER  -->
     <div class="mb-5">
       <div class="flex justify-between items-center h-[100px]">
@@ -89,12 +91,6 @@ watchEffect(() => {
             >X</span
           >
         </div>
-        <!-- <button
-          @click="resetFilter"
-          class="px-3 py-2 bg-red-300 rounded-lg hover:bg-red-500 hover:text-white font-semibold transition-all"
-        >
-          Reset
-        </button> -->
       </div>
       <div>Quantity products: {{ filteredProducts.length }}</div>
     </div>

@@ -17,7 +17,7 @@ const props = defineProps({
         v-for="product in filteredProducts"
         :key="product.id"
       >
-        <router-link :to="`product/${product.id}`">
+        <router-link :to="`product-details/${product.id}`">
           <div
             class="flex justify-center p-5 border-2 shadow-md gap-2 flex-wrap"
           >

@@ -4,14 +4,19 @@ import Home from "../views/Home.vue";
 import Register from "../views/Register.vue";
 import SignIn from "../views/SignIn.vue";
 import ProductDetails from "../views/ProductDetails.vue";
+import ProductList from '../components/ProductList.vue'
 
 const routes = [
   {
-    path: "/:page?",
+    path: "/",
     component: Home,
   },
   {
-    path: "/product/:id",
+    path: "/product/:page?",
+    component: ProductList,
+  },
+  {
+    path: "/product-details/:id",
     component: ProductDetails,
   },
   {

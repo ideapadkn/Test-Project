@@ -39,7 +39,12 @@ const handlerSignOut = () => {
         </div>
       </router-link>
       <div class="flex gap-3">
-        <!-- <router-link class="hover:bg-blue-400 hover:text-white hover:rounded-md px-2 py-1 transition-all" to="/feed">Feed</router-link> -->
+        <router-link
+          to="/product"
+          class="hover:bg-yellow-400 hover:text-white hover:rounded-md px-2 py-1 transition-all"
+        >
+          Products
+        </router-link>
         <router-link
           class="hover:bg-green-500 hover:text-white hover:rounded-md px-2 py-1 transition-all"
           to="/register"
