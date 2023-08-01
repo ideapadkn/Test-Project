@@ -12,12 +12,12 @@ let auth;
 const register = () => {
   signInWithEmailAndPassword(getAuth(), email.value, password.value)
     .then((data) => {
-      alert("Successfully signed in!");
-      console.log(auth.currentUser.email);
       router.push("/");
+      alert("Successfully signed in!");
+      console.log(auth.currentUser);
     })
     .catch((err) => {
-      console.log(err.code);
+      console.log("err: " + err);
       switch (err.code) {
         case "auth/invalid-email":
           errMsg.value = "Invalid email";
@@ -68,8 +68,8 @@ const signInWithGoogle = () => {};
         Submit
       </button>
     </p>
-    <p>
+    <!-- <p>
       <button @click="signInWithGoogle">Sign In With Google</button>
-    </p>
+    </p> -->
   </div>
 </template>

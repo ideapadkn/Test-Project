@@ -3,12 +3,14 @@ import { ref, computed, watchEffect } from "vue";
 import axios from "axios";
 import ProductItem from "./ProductItem.vue";
 import Pagination from "./Pagination.vue";
+import { useRouter } from "vue-router";
 
-let products = ref([]);
-let searchTerm = ref("");
-let page = ref(1);
-let limit = ref(12);
-let totalPages = ref(0);
+const products = ref([]);
+const searchTerm = ref("");
+const page = ref(1);
+const limit = ref(12);
+const totalPages = ref(0);
+const router = useRouter();
 
 const getData = async () => {
   try {
@@ -20,7 +22,7 @@ const getData = async () => {
     });
     console.log(res.data);
     products.value = res.data;
-    totalPages = Math.ceil(res.data?.total / 12);
+    totalPages.value = Math.ceil(res.data?.total / 12);
   } catch (err) {
     console.error("Error fetching data:", err);
   }
@@ -44,6 +46,7 @@ const resetFilter = () => {
 // PAGINATION
 const changePage = (pageNumber) => {
   page.value = pageNumber;
+  // router.push(`/currentPage${pageNumber}`)
   getData();
 
   window.scrollTo(0, 0);
@@ -51,11 +54,16 @@ const changePage = (pageNumber) => {
 
 // SAVE DATA
 page.value = parseInt(sessionStorage.getItem("page") || "1");
-const storedData = JSON.parse(sessionStorage.getItem("products") || "[]");
-products.value = storedData.data || [];
+const storedData = JSON.parse(
+  sessionStorage.getItem("filteredProducts") || "[]"
+);
+filteredProducts.value = storedData.data || [];
 watchEffect(() => {
   sessionStorage.setItem("page", page.value.toString());
-  sessionStorage.setItem("products", JSON.stringify({ data: products.value }));
+  sessionStorage.setItem(
+    "filteredProducts",
+    JSON.stringify({ data: filteredProducts.value })
+  );
 });
 </script>
 
@@ -64,20 +72,26 @@ watchEffect(() => {
     <!-- FILTER  -->
     <div class="mb-5">
       <div class="flex justify-between items-center h-[100px]">
-        <div>
+        <div class="relative flex justify-center items-center">
           <input
             placeholder="Search by brand..."
             class="px-3 py-2 border-2 outline-none"
             v-model="searchTerm"
             type="text"
           />
+          <span
+            v-if="searchTerm"
+            @click="resetFilter"
+            class="absolute right-2 text-gray-700 cursor-pointer"
+            >X</span
+          >
         </div>
-        <button
+        <!-- <button
           @click="resetFilter"
           class="px-3 py-2 bg-red-300 rounded-lg hover:bg-red-500 hover:text-white font-semibold transition-all"
         >
           Reset
-        </button>
+        </button> -->
       </div>
       <div>Quantity products: {{ filteredProducts.length }}</div>
     </div>
