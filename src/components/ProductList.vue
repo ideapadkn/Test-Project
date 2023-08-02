@@ -56,12 +56,6 @@ const changePage = (pageNumber) => {
 
   window.scrollTo(0, 0);
 };
-
-// SAVE DATA
-// page.value = parseInt(sessionStorage.getItem("page") || "1");
-// watchEffect(() => {
-//   sessionStorage.setItem("page", page.value.toString());
-// });  
 </script>
 
 <template>
