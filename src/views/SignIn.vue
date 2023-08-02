@@ -12,7 +12,7 @@ let auth;
 const register = () => {
   signInWithEmailAndPassword(getAuth(), email.value, password.value)
     .then((data) => {
-      router.push("/");
+      router.back();
       alert("Successfully signed in!");
       console.log(auth.currentUser);
     })
