@@ -70,7 +70,7 @@ const changePage = (pageNumber) => {
           <input
             placeholder="Search by brand..."
             class="px-3 py-2 border-2 outline-none"
-            v-model="searchTerm"
+            v-model.trim="searchTerm"
             type="text"
           />
           <span
