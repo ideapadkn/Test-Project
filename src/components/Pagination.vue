@@ -39,3 +39,18 @@ const changePage = (page) => {
     </router-link>
   </div>
 </template>
+
+<style>
+.current-page {
+  border: 2px solid #000;
+}
+@media (max-width: 600px) {
+  .info {
+    flex-wrap: wrap;
+  }
+  .info-img {
+    margin-top: 20px;
+    width: 100%;
+  }
+}
+</style>

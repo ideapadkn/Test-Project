@@ -13,10 +13,10 @@ const totalPages = ref(0);
 const router = useRouter();
 const route = useRoute();
 const page = ref(route.query?.page || 1);
-console.log("route.query?.page", page.value);
 
 // GET DATA FROM API
 const getData = async () => {
+  console.log("route.query?.page", page.value);
   try {
     const res = await axios.get("https://dummyjson.com/products", {
       params: {
@@ -58,22 +58,17 @@ const changePage = (pageNumber) => {
 };
 
 // SAVE DATA
-const storedData = JSON.parse(
-  sessionStorage.getItem("filteredProducts") || "[]"
-);
-filteredProducts.value = storedData.data || [];
-watchEffect(() => {
-  sessionStorage.setItem(
-    "filteredProducts",
-    JSON.stringify({ data: filteredProducts.value })
-  );
-});
+// page.value = parseInt(sessionStorage.getItem("page") || "1");
+// watchEffect(() => {
+//   sessionStorage.setItem("page", page.value.toString());
+// });
 </script>
 
 <template>
   <div class="container mx-auto px-5">
     <!-- NAVBAR -->
     <Navbar />
+
     <!-- FILTER  -->
     <div class="mb-5">
       <div class="flex justify-between items-center h-[100px]">
@@ -102,18 +97,3 @@ watchEffect(() => {
     <Pagination :page="page" :totalPages="totalPages" @change="changePage" />
   </div>
 </template>
-
-<style>
-.current-page {
-  border: 2px solid #000;
-}
-@media (max-width: 600px) {
-  .info {
-    flex-wrap: wrap;
-  }
-  .info-img {
-    margin-top: 20px;
-    width: 100%;
-  }
-}
-</style>
