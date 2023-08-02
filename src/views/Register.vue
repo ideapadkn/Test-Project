@@ -21,7 +21,6 @@ const register = () => {
     })
     .catch((err) => {
       console.log(err.code);
-      alert(err.message);
     });
 };
 
@@ -66,7 +65,7 @@ const signInWithGoogle = () => {
       </button>
     </p>
     <p>
-      <button @click="signInWithGoogle">Sign In With Google</button>
+      <!-- <button @click="signInWithGoogle">Sign In With Google</button> -->
     </p>
   </div>
 </template>

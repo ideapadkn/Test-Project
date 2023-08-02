@@ -5,7 +5,6 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 const isLoggedIn = ref(false);
 const reviews = ref([]);
 const comment = ref("");
-const user = ref(null);
 
 let auth;
 onMounted(() => {
