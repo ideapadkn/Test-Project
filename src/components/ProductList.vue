@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onMounted, watchEffect } from "vue";
+import { ref, computed, onMounted } from "vue";
 import axios from "axios";
 import ProductItem from "./ProductItem.vue";
 import Pagination from "./Pagination.vue";
@@ -12,7 +12,7 @@ const limit = ref(12);
 const totalPages = ref(0);
 const router = useRouter();
 const route = useRoute();
-const page = ref(route.query?.page || 1);
+const page = ref(+route.query?.page || 1);
 
 // GET DATA FROM API
 const getData = async () => {
@@ -61,7 +61,7 @@ const changePage = (pageNumber) => {
 // page.value = parseInt(sessionStorage.getItem("page") || "1");
 // watchEffect(() => {
 //   sessionStorage.setItem("page", page.value.toString());
-// });
+// });  
 </script>
 
 <template>
