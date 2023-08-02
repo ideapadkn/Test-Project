@@ -17,6 +17,7 @@ const emit = defineEmits("change");
 const changePage = (page) => {
   emit("change", page);
 };
+
 </script>
 
 <template>
