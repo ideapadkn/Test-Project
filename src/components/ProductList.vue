@@ -4,14 +4,16 @@ import axios from "axios";
 import ProductItem from "./ProductItem.vue";
 import Pagination from "./Pagination.vue";
 import Navbar from "./Navbar.vue";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 
 const products = ref([]);
 const searchTerm = ref("");
-const page = ref(1);
 const limit = ref(12);
 const totalPages = ref(0);
 const router = useRouter();
+const route = useRoute();
+const page = ref(route.query?.page || 1);
+console.log("route.query?.page", page.value);
 
 // GET DATA FROM API
 const getData = async () => {
@@ -56,13 +58,11 @@ const changePage = (pageNumber) => {
 };
 
 // SAVE DATA
-page.value = parseInt(sessionStorage.getItem("page") || "1");
 const storedData = JSON.parse(
   sessionStorage.getItem("filteredProducts") || "[]"
 );
 filteredProducts.value = storedData.data || [];
 watchEffect(() => {
-  sessionStorage.setItem("page", page.value.toString());
   sessionStorage.setItem(
     "filteredProducts",
     JSON.stringify({ data: filteredProducts.value })

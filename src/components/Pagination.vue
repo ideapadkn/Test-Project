@@ -4,11 +4,11 @@ import { defineEmits, defineProps } from "vue";
 const props = defineProps({
   totalPages: {
     type: Number,
-    ruquired: true,
+    required: true,
   },
   page: {
     type: Number,
-    ruquired: true,
+    required: true,
   },
 });
 

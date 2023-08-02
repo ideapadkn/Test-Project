@@ -33,7 +33,7 @@ const handlerSignOut = () => {
           <img
             class="inline-block w-[50px]"
             src="https://apelsinsalon.ru/wp-content/uploads/2021/12/cropped-fav.png"
-            alt=""
+            alt="logo"
           />
           <h1 class="inline-block text-4xl font-semibold">Apelsin</h1>
         </div>
