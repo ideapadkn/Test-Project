@@ -31,7 +31,7 @@ const getData = async () => {
     );
     console.log(res.data);
     products.value = res.data;
-    totalPages.value = Math.ceil(res.data?.total / limit.value); //res.data?.total
+    totalPages.value = Math.floor(res.data?.total / limit.value); //res.data?.total
   } catch (err) {
     console.error("Error fetching data:", err);
   }
