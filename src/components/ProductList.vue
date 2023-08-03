@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, onMounted, watch } from "vue";
 import axios from "axios";
 import ProductItem from "./ProductItem.vue";
 import Pagination from "./Pagination.vue";
@@ -19,25 +19,19 @@ const page = ref(+route.query?.page || 1);
 const getData = async () => {
   console.log("route.query?.page", page.value);
   try {
-    const res = await axios.get(
-      `https://dummyjson.com/products/search?q=${searchTerm.value}`,
-      {
-        params: {
-          limit: limit.value,
-          skip: page.value,
-        },
-      }
-    );
+    const res = await axios.get(`https://dummyjson.com/products/search?q=${searchTerm.value}`, {
+      params: {
+        skip: page.value * limit.value - 1,
+        limit: limit.value,
+      },
+    });
     console.log(res.data);
     products.value = res.data;
-    totalPages.value = Math.ceil(res.data?.total / limit.value); //res.data?.total
+    totalPages.value = Math.ceil(100 / limit.value); //res.data?.total
   } catch (err) {
     console.error("Error fetching data:", err);
   }
 };
-onMounted(() => {
-  getData();
-});
 
 // FILTER BY BRAND
 const filteredProducts = computed(() => {
@@ -56,10 +50,14 @@ const resetFilter = () => {
 // PAGINATION
 const changePage = (pageNumber) => {
   page.value = pageNumber;
-  getData();
+  getData()
 
   window.scrollTo(0, 0);
 };
+
+onMounted(() => {
+  getData();
+});
 </script>
 
 <template>
