@@ -25,7 +25,9 @@ const props = defineProps({
               <img class="h-[200px] w-full" :src="product.images[0]" alt="" />
             </div>
             <div class="info-text">
-              <div class="text-[18px] w-[300px] whitespace-nowrap overflow-hidden">
+              <div
+                class="text-[18px] w-[300px] whitespace-nowrap overflow-hidden"
+              >
                 <b>{{ product.title }}</b>
               </div>
               <div>

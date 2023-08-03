@@ -54,13 +54,13 @@ const resetFilter = () => {
 // PAGINATION
 const changePage = (pageNumber) => {
   page.value = pageNumber;
-  getData()
+  getData();
   window.scrollTo(0, 0);
 };
 
 const handleSearch = () => {
   page.value = 1;
-  getData()
+  getData();
 };
 
 onMounted(() => {
