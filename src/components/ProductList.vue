@@ -37,6 +37,10 @@ const getData = async () => {
   }
 };
 
+onMounted(() => {
+  getData();
+});
+
 // FILTER BY BRAND
 const filteredProducts = computed(() => {
   return (
@@ -60,13 +64,9 @@ const changePage = (pageNumber) => {
 };
 
 const handleSearch = () => {
-  page.value = 1;
+  page.value = +route.query.page;
   getData();
 };
-
-onMounted(() => {
-  getData();
-});
 </script>
 
 <template>
