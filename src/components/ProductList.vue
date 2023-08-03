@@ -60,6 +60,7 @@ const changePage = (pageNumber) => {
 
 const handleSearch = () => {
   page.value = 1;
+  getData()
 };
 
 onMounted(() => {
