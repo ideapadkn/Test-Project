@@ -64,7 +64,7 @@ const changePage = (pageNumber) => {
 };
 
 const handleSearch = () => {
-  page.value = +route.query.page;
+  page.value = 1;
   getData();
 };
 </script>
