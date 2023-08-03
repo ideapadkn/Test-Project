@@ -4,8 +4,8 @@ import axios from "axios";
 import Reviews from "./Reviews.vue";
 import { useRoute } from "vue-router";
 
-let route = useRoute();
-let products = ref([]);
+const route = useRoute();
+const products = ref([]);
 
 const getData = async () => {
   try {

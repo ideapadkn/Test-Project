@@ -4,6 +4,7 @@ import axios from "axios";
 import ProductItem from "./ProductItem.vue";
 import Pagination from "./Pagination.vue";
 import Navbar from "./Navbar.vue";
+// import Filter from "./Filter.vue";
 import { useRouter, useRoute } from "vue-router";
 
 const products = ref([]);
@@ -18,15 +19,18 @@ const page = ref(+route.query?.page || 1);
 const getData = async () => {
   console.log("route.query?.page", page.value);
   try {
-    const res = await axios.get("https://dummyjson.com/products", {
-      params: {
-        limit: limit.value,
-        skip: page.value,
-      },
-    });
+    const res = await axios.get(
+      `https://dummyjson.com/products/search?q=${searchTerm.value}`,
+      {
+        params: {
+          limit: limit.value,
+          skip: page.value,
+        },
+      }
+    );
     console.log(res.data);
     products.value = res.data;
-    totalPages.value = Math.ceil(res.data?.total / limit.value);
+    totalPages.value = Math.ceil(res.data?.total / limit.value); //res.data?.total
   } catch (err) {
     console.error("Error fetching data:", err);
   }
@@ -64,6 +68,7 @@ const changePage = (pageNumber) => {
     <Navbar />
 
     <!-- FILTER  -->
+    <!-- <Filter :filteredProducts="filteredProducts" /> -->
     <div class="mb-5">
       <div class="flex justify-between items-center h-[100px]">
         <div class="relative flex justify-center items-center">
