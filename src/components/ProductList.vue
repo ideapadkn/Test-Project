@@ -7,27 +7,31 @@ import Navbar from "./Navbar.vue";
 // import Filter from "./Filter.vue";
 import { useRouter, useRoute } from "vue-router";
 
-const products = ref([]);
-const searchTerm = ref("");
-const limit = ref(12);
-const totalPages = ref(0);
 const router = useRouter();
 const route = useRoute();
+
+const products = ref([]);
+const searchTerm = ref("");
 const page = ref(+route.query?.page || 1);
+const limit = ref(12);
+const totalPages = ref(0);
 
 // GET DATA FROM API
 const getData = async () => {
   console.log("route.query?.page", page.value);
   try {
-    const res = await axios.get(`https://dummyjson.com/products/search?q=${searchTerm.value}`, {
-      params: {
-        skip: page.value * limit.value - 1,
-        limit: limit.value,
-      },
-    });
+    const res = await axios.get(
+      `https://dummyjson.com/products/search?q=${searchTerm.value}`,
+      {
+        params: {
+          skip: page.value * limit.value - 13,
+          limit: limit.value,
+        },
+      }
+    );
     console.log(res.data);
     products.value = res.data;
-    totalPages.value = Math.ceil(100 / limit.value); //res.data?.total
+    totalPages.value = Math.ceil(res.data?.total / limit.value); //res.data?.total
   } catch (err) {
     console.error("Error fetching data:", err);
   }
@@ -51,8 +55,11 @@ const resetFilter = () => {
 const changePage = (pageNumber) => {
   page.value = pageNumber;
   getData()
-
   window.scrollTo(0, 0);
+};
+
+const handleSearch = () => {
+  page.value = 1;
 };
 
 onMounted(() => {
@@ -75,6 +82,7 @@ onMounted(() => {
             class="px-3 py-2 border-2 outline-none"
             v-model.trim="searchTerm"
             type="text"
+            @input="handleSearch"
           />
           <span
             v-if="searchTerm"
