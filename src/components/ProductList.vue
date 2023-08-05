@@ -53,7 +53,7 @@ const filteredProducts = computed(() => {
 // RESET FILTER
 const resetFilter = () => {
   searchTerm.value = "";
-  page.value = +route.query?.page
+  page.value = +route.query?.page;
   getData();
 };
 
