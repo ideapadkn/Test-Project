@@ -42,6 +42,7 @@ onMounted(() => {
 });
 
 // FILTER BY BRAND
+
 const filteredProducts = computed(() => {
   return (
     products.value?.products?.filter((product) =>
