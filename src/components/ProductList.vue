@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, onMounted, watch } from "vue";
 import axios from "axios";
 import ProductItem from "./ProductItem.vue";
 import Pagination from "./Pagination.vue";
@@ -55,6 +55,7 @@ const filteredProducts = computed(() => {
 const resetFilter = () => {
   searchTerm.value = "";
   page.value = +route.query?.page;
+  console.log(page.value);
   getData();
 };
 
